@@ -25,8 +25,12 @@ class HomeController extends BaseController {
 
   final formKey = GlobalKey<FormState>();
   final formKey2 = GlobalKey<FormState>();
+
   late File file;
   late File signedFile;
+
+  String textDateForEncryption = "";
+  String textDateForDecryption = "";
 
   void pickFile() async {
     picker = await FilePicker.platform.pickFiles();
@@ -34,6 +38,18 @@ class HomeController extends BaseController {
     if (picker != null) {
       file = File(picker?.files.single.path ?? "");
       ctrl1.text = file.path;
+      textDateForEncryption = await file.readAsString();
+    } else {
+      Logger().e("File not chosen");
+    }
+  }
+
+  void pickSignedFile() async {
+    signPicker = await FilePicker.platform.pickFiles();
+
+    if (signPicker != null) {
+      signedFile = File(signPicker?.files.single.path ?? "");
+      ctrl2.text = signedFile.path;
     } else {
       Logger().e("File not chosen");
     }
@@ -53,22 +69,15 @@ class HomeController extends BaseController {
   void checkRSASign() async{
     if (formKey2.currentState!.validate()) {
       try {
-        rsaKeypair.privateKey.decrypt(await signedFile.readAsString());
-        Get.defaultDialog(title: "RSA imzoni Tekshirish", content: const Text("Fayl o'zgartirilmagan imzo to'g'ri"));
+        if(textDateForEncryption == rsaKeypair.privateKey.decrypt(await signedFile.readAsString())) {
+          Get.defaultDialog(title: "RSA imzoni Tekshirish", content: const Text("Fayl o'zgartirilmagan imzo to'g'ri"));
+        }
+        Get.defaultDialog(title: "Xatolik", content: const Text("Imzolangan fayl o'zgartirilgan", textAlign: TextAlign.center));
       } catch(e) {
         Get.defaultDialog(title: "Xatolik", content: const Text("Imzolangan fayl o'zgartirilgan", textAlign: TextAlign.center));
       }
     }
   }
 
-  void pickSignedFile() async {
-    signPicker = await FilePicker.platform.pickFiles();
 
-    if (signPicker != null) {
-      signedFile = File(signPicker?.files.single.path ?? "");
-      ctrl2.text = signedFile.path;
-    } else {
-      Logger().e("File not chosen");
-    }
-  }
 }
