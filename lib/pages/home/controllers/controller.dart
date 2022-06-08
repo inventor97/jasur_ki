@@ -14,7 +14,6 @@ class HomeController extends BaseController {
 
   TextEditingController ctrl1 = TextEditingController();
   TextEditingController ctrl2 = TextEditingController();
-
   TextEditingController pNumCtrl = TextEditingController();
   TextEditingController qNumCtrl = TextEditingController();
 
