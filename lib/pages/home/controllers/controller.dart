@@ -45,7 +45,7 @@ class HomeController extends BaseController {
   }
 
   void pickSignedFile() async {
-    signPicker = await FilePicker.platform.pickFiles();
+    signPicker = await FilePicker.platform.pickFiles(type: FileType.custom, allowedExtensions: ['txt']);
 
     if (signPicker != null) {
       signedFile = File(signPicker?.files.single.path ?? "");
