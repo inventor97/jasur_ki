@@ -59,9 +59,9 @@ class HomeController extends BaseController {
     if (formKey.currentState!.validate()) {
       try {
         await signedFile.writeAsString(rsaKeypair.publicKey.encrypt(await file.readAsString()));
-        Get.defaultDialog(title: "RSA Imzo", content: const Text("Tanlangan fayl kiritilgan parametrlar asosida imzolandi", textAlign: TextAlign.center));
+        Get.defaultDialog(title: "Shifrlash", content: const Text("Tanlangan fayl shifrlandi", textAlign: TextAlign.center));
       } catch (e) {
-        Get.defaultDialog(title: "Xatolik", content: const Text("Faylni o'qishda xatolik yoki imzolangan fayl addresida xatolik", textAlign: TextAlign.center));
+        Get.defaultDialog(title: "Xatolik", content: const Text("Faylni o'qishda xatolik yoki fayl addresida xatolik", textAlign: TextAlign.center));
       }
     }
   }
@@ -70,11 +70,10 @@ class HomeController extends BaseController {
     if (formKey2.currentState!.validate()) {
       try {
         if(textDateForEncryption == rsaKeypair.privateKey.decrypt(await signedFile.readAsString())) {
-          Get.defaultDialog(title: "RSA imzoni Tekshirish", content: const Text("Fayl o'zgartirilmagan imzo to'g'ri"));
+          Get.defaultDialog(title: "Deshifrlash", content: const Text("Fayl deshifrlandi"));
         }
-        Get.defaultDialog(title: "Xatolik", content: const Text("Imzolangan fayl o'zgartirilgan", textAlign: TextAlign.center));
       } catch(e) {
-        Get.defaultDialog(title: "Xatolik", content: const Text("Imzolangan fayl o'zgartirilgan", textAlign: TextAlign.center));
+        Get.defaultDialog(title: "Xatolik", content: const Text("Fayl o'zgartirilgan", textAlign: TextAlign.center));
       }
     }
   }

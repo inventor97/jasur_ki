@@ -32,9 +32,9 @@ class MyTextField extends StatelessWidget {
     return TextFormField(
       style: MyTextStyles.poppinsRegular(color: Colors.black, fontSize: 6),
       controller: ctrl,
-      cursorColor: MyColors.secondaryColor,
       obscureText: obscureText,
       validator: validator,
+      readOnly: true,
       autofocus: autofocus,
       keyboardType: inputType,
       decoration: InputDecoration(
@@ -43,10 +43,6 @@ class MyTextField extends StatelessWidget {
         focusColor: Colors.white,
         floatingLabelBehavior: FloatingLabelBehavior.never,
         label: Text(label, style: MyTextStyles.poppinsRegular(color: Colors.grey, fontSize: 6)),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0)),
-        enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.transparent, width: 0), borderRadius: BorderRadius.circular(15.0)),
-        focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.transparent, width: 2), borderRadius: BorderRadius.circular(15.0)),
-        focusedErrorBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.red, width: 2), borderRadius: BorderRadius.circular(15.0)),
         suffixIcon: suffixIcon,
         prefixIcon: prefixIcon,
       ),
