@@ -37,8 +37,8 @@ dependencies:
   get: ^4.6.5
   get_storage: ^2.0.3
   logger: ^1.1.0
-  file_picker: ^3.0.4
   crypton: ^2.0.5
+  file_picker: ^4.6.1
 
 dev_dependencies:
   flutter_test:

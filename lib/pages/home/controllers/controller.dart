@@ -33,11 +33,11 @@ class HomeController extends BaseController {
   String textDateForDecryption = "";
 
   void pickFile() async {
-    picker = await FilePicker.platform.pickFiles();
+    picker = await FilePicker.platform.pickFiles(type: FileType.custom, allowedExtensions: ['doc', 'docx', 'txt']);
 
     if (picker != null) {
       file = File(picker?.files.single.path ?? "");
-      ctrl1.text = file.path;
+      ctrl1.text = picker?.files.single.path.toString() ?? "";
       textDateForEncryption = await file.readAsString();
     } else {
       Logger().e("File not chosen");
