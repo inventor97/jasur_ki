@@ -69,6 +69,7 @@ class HomeController extends BaseController {
   void checkRSASign() async{
     if (formKey2.currentState!.validate()) {
       try {
+
         if(textDateForEncryption == rsaKeypair.privateKey.decrypt(await signedFile.readAsString())) {
           Get.defaultDialog(title: "Deshifrlash", content: const Text("Fayl deshifrlandi"));
         }
